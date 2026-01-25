@@ -23,11 +23,10 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-500 ease-in-out ${
-        isScrolled
-          ? 'top-4 w-[95%] md:w-[85%] max-w-6xl rounded-full bg-ssa-black/60 backdrop-blur-xl border border-ssa-beige/10 shadow-lg py-3 px-6'
-          : 'top-0 w-full bg-transparent py-6 px-6 md:px-0 border-b border-transparent'
-      }`}
+      className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-500 ease-in-out ${isScrolled
+        ? 'top-4 w-[95%] md:w-[85%] max-w-6xl rounded-full bg-ssa-black/60 backdrop-blur-xl border border-ssa-beige/10 shadow-lg py-3 px-6'
+        : 'top-0 w-full bg-transparent py-6 px-6 md:px-0 border-b border-transparent'
+        }`}
     >
       <div className={`flex justify-between items-center h-full mx-auto ${isScrolled ? 'w-full' : 'container'}`}>
         {/* Logo */}
@@ -50,9 +49,12 @@ const Navbar: React.FC = () => {
 
         {/* Right side - Join Us button */}
         <div className="hidden md:block">
-           <button className="bg-ssa-gold hover:bg-white text-ssa-black hover:text-ssa-darkgreen font-semibold py-1.5 px-5 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-lg shadow-ssa-gold/20">
+          <a
+            href="#contact"
+            className="bg-ssa-gold hover:bg-white text-ssa-black hover:text-ssa-darkgreen font-semibold py-1.5 px-5 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-lg shadow-ssa-gold/20 inline-block"
+          >
             Join Us
-          </button>
+          </a>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -79,9 +81,13 @@ const Navbar: React.FC = () => {
               {link.name}
             </a>
           ))}
-          <button className="bg-ssa-gold text-ssa-black font-semibold py-3 rounded-lg w-full mt-2">
+          <a
+            href="#contact"
+            className="bg-ssa-gold text-ssa-black font-semibold py-3 rounded-lg w-full mt-2 text-center block"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             Join Us
-          </button>
+          </a>
         </div>
       )}
     </nav>

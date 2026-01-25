@@ -74,3 +74,31 @@ export const getResources = async () => {
     return [];
   }
 };
+
+export const getGalleryImages = async () => {
+  const query = gql`
+    query Gallery {
+      galleryImages(first: 100) {
+        id
+        caption
+        image {
+          url
+        }
+      }
+    }
+  `;
+
+  try {
+    const result = await client.request(query) as any;
+    return result.galleryImages
+      .map((item: any) => ({
+        id: item.id,
+        caption: item.caption || '',
+        url: item.image?.url || '', // Handle null image
+      }))
+      .filter((item: any) => item.url !== ''); // Filter out items with no image
+  } catch (error) {
+    console.error("Failed to fetch gallery images:", error);
+    return [];
+  }
+};
