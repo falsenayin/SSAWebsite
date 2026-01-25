@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-500 ease-in-out ${isScrolled
+      className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-1000 ease-in-out ${isScrolled
         ? 'top-4 w-[95%] md:w-[85%] max-w-6xl rounded-full bg-ssa-black/60 backdrop-blur-xl border border-ssa-beige/10 shadow-lg py-3 px-6'
         : 'top-0 w-full bg-transparent py-6 px-6 md:px-0 border-b border-transparent'
         }`}
@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
             href="https://chat.whatsapp.com/LnaQUap7W8OB4XqdUZNEOU"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-1.5 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-lg shadow-green-500/20 inline-flex items-center gap-2"
+            className="bg-ssa-gold hover:bg-white text-ssa-black hover:text-ssa-darkgreen font-semibold py-1.5 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-lg shadow-ssa-gold/20 inline-flex items-center gap-2"
           >
             <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="stroke-[2.5px]">
               <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
