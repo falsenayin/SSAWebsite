@@ -8,12 +8,14 @@ const client = new GraphQLClient(HYGRAPH_ENDPOINT);
 export const getEvents = async () => {
   const query = gql`
     query Events {
-      events(first: 100, orderBy: date_ASC) {
+      events(first: 100, orderBy: dateandtime_ASC) {
         title
         description
-        date
-        time
-        location
+        dateandtime
+        location {
+          latitude
+          longitude
+        }
         tag
         registrationLink
         image {
@@ -22,14 +24,24 @@ export const getEvents = async () => {
       }
     }
   `;
-  
+
   try {
-    const result = await client.request(query);
+    const result = await client.request(query) as any;
     // Map Hygraph result structure to our app structure
-    return result.events.map((e: any) => ({
-      ...e,
-      image: e.image?.url || '', // Extract URL from image object
-    }));
+    return result.events.map((e: any) => {
+      const dateObj = new Date(e.dateandtime);
+      const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); // e.g. "Feb 22"
+      const timeStr = dateObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }); // e.g. "6:00 PM"
+
+      return {
+        ...e,
+        date: dateStr,
+        time: timeStr,
+        // Since location is coords, we default to "On Campus" or empty string if it's just an object
+        location: e.location ? 'UC San Diego' : 'TBD',
+        image: e.image?.url || '', // Extract URL from image object
+      };
+    });
   } catch (error) {
     console.error("Failed to fetch events:", error);
     return [];
@@ -51,7 +63,7 @@ export const getResources = async () => {
   `;
 
   try {
-    const result = await client.request(query);
+    const result = await client.request(query) as any;
     return result.resources.map((r: any) => ({
       ...r,
       isExternal: true, // Default for CMS items
