@@ -65,14 +65,26 @@ export const getEvents = async () => {
                 location = fields.location;
             }
 
+            // Helper to extract plain text from Rich Text
+            let description = '';
+            if (typeof fields.description === 'string') {
+                description = fields.description;
+            } else if (fields.description?.nodeType === 'document') {
+                // Simple extraction of text from paragraphs
+                description = fields.description.content
+                    .map((node: any) => node.content?.map((c: any) => c.value).join(''))
+                    .join('\n');
+            }
+
             return {
                 title: fields.title,
-                description: fields.description,
+                description: description,
                 date: dateStr,
                 time: timeStr,
                 location: location,
                 tag: fields.tag,
-                registrationLink: fields.registrationLink,
+                // Handle the typo in Contentful model if present
+                registrationLink: fields.registerationLink || fields.registrationLink,
                 image: fields.image?.fields?.file?.url ? `https:${fields.image.fields.file.url}` : '',
             };
         });
