@@ -1,5 +1,15 @@
 import React from 'react';
 import { BookOpen, Rocket, GraduationCap, FileCheck, Home, Briefcase, Instagram, ArrowUpRight, Download, ExternalLink } from 'lucide-react';
+import { resources } from '../data/resources';
+
+// Icon mapping helper since we can't store React components in JSON/CMS easily
+const IconMap: Record<string, React.ReactNode> = {
+    Rocket: <Rocket size={24} />,
+    GraduationCap: <GraduationCap size={24} />,
+    FileCheck: <FileCheck size={24} />,
+    Home: <Home size={24} />,
+    Briefcase: <Briefcase size={24} />
+};
 
 const ResourcesPage: React.FC = () => {
   return (
@@ -56,57 +66,21 @@ const ResourcesPage: React.FC = () => {
       <section className="container mx-auto px-6 mb-24">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             
-            {/* 2. Quick Start */}
-            <ResourceCard 
-                icon={<Rocket size={24} />}
-                title="New Student Quick Start"
-                description="A brief orientation overview for incoming students. Use this to get your bearings before diving into the details."
-                tag="Orientation"
-                linkText="Open Quick Guide"
-                footerText="For detailed steps, see Handbook"
-            />
-
-            {/* 3. UCSD Essentials */}
-            <ResourceCard 
-                icon={<GraduationCap size={24} />}
-                title="UC San Diego Essentials"
-                description="High-level overview of enrollment, General Education (GE) requirements, placement exams, and health insurance."
-                tag="Academics"
-                linkText="Visit UCSD.edu"
-                isExternal
-            />
-
-            {/* 4. Scholarships */}
-            <ResourceCard 
-                icon={<FileCheck size={24} />}
-                title="Scholarships & Sponsorships"
-                description="Information regarding SACM, Safeer, and other sponsored programs. Understand the basics of your status."
-                tag="Administrative"
-                linkText="Sponsorship Info"
-                footerText="Consult specific portal for docs"
-            />
-
-            {/* 5. Life in San Diego */}
-            <ResourceCard 
-                icon={<Home size={24} />}
-                title="Life in San Diego"
-                description="Explore popular housing areas, transportation options, and where to find the best Halal food in the city."
-                tag="Lifestyle"
-                linkText="View Area Map"
-                footerText="Housing checklist in Handbook"
-            />
-
-            {/* 6. Professional Development */}
-            <ResourceCard 
-                icon={<Briefcase size={24} />}
-                title="Professional Development"
-                description="Grow your career with SSA initiatives. Connect with alumni, attend workshops, and build your resume."
-                tag="Career"
-                linkText="Visit LinkedIn"
-                isExternal
-            />
+            {resources.map((resource, index) => (
+                <ResourceCard 
+                    key={index}
+                    icon={IconMap[resource.iconName] || <Rocket size={24} />}
+                    title={resource.title}
+                    description={resource.description}
+                    tag={resource.tag}
+                    linkText={resource.linkText}
+                    footerText={resource.footerText}
+                    isExternal={resource.isExternal}
+                    link={resource.link}
+                />
+            ))}
             
-             {/* 7. Stay Updated (Card Style) */}
+             {/* Stay Updated (Card Style) */}
              <div className="bg-gradient-to-br from-ssa-gold to-ssa-beige rounded-[2rem] p-8 flex flex-col justify-between group hover:shadow-2xl hover:shadow-ssa-gold/20 transition-all duration-300">
                 <div>
                     <div className="flex justify-between items-start mb-6">
@@ -162,9 +136,10 @@ interface ResourceCardProps {
     linkText: string;
     footerText?: string;
     isExternal?: boolean;
+    link: string;
 }
 
-const ResourceCard: React.FC<ResourceCardProps> = ({ icon, title, description, tag, linkText, footerText, isExternal }) => {
+const ResourceCard: React.FC<ResourceCardProps> = ({ icon, title, description, tag, linkText, footerText, isExternal, link }) => {
     return (
         <div className="bg-ssa-beige rounded-[2rem] p-8 flex flex-col group hover:translate-y-[-4px] hover:shadow-xl transition-all duration-300">
             <div className="flex justify-between items-start mb-6">
@@ -185,14 +160,19 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ icon, title, description, t
             </p>
             
             <div className="mt-auto">
-                <button className="flex items-center gap-2 text-ssa-black font-bold text-sm group/btn hover:text-ssa-gold transition-colors">
+                <a 
+                    href={link}
+                    target={isExternal ? "_blank" : "_self"}
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-ssa-black font-bold text-sm group/btn hover:text-ssa-gold transition-colors inline-flex"
+                >
                     {linkText}
                     {isExternal ? (
                          <ExternalLink size={16} className="transition-transform group-hover/btn:translate-x-1" />
                     ) : (
                          <ArrowUpRight size={16} className="transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
                     )}
-                </button>
+                </a>
                 {footerText && (
                     <p className="mt-4 pt-4 border-t border-ssa-black/10 text-xs font-semibold text-ssa-black/40 uppercase tracking-wide">
                         {footerText}

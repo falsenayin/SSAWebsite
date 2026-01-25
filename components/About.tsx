@@ -1,26 +1,8 @@
 import React from 'react';
 import { Target, Eye, Globe, Calendar, BookOpen } from 'lucide-react';
+import { teamMembers } from '../data/team';
 
 const About: React.FC = () => {
-  const teamMembers = [
-    { name: "Fawaz Al-Senayin", role: "President" },
-    { name: "Ahmed Turkistani", role: "VP External" },
-    { name: "Nawar Kidwai", role: "VP Internal" },
-    { name: "Almontaha Alsonbul", role: "Treasurer" },
-    { name: "Abdulrahman Alghamdi", role: "Secretary" },
-    { name: "Ranya Tashkandy", role: "Events Lead" },
-    { name: "Ahmed Ageel", role: "Events" },
-    { name: "Khalil Alshanqiti", role: "Events" },
-    { name: "Nooran Basheer", role: "Events" },
-    { name: "Mariya Alsaiari", role: "Media Lead" },
-    { name: "Anas Almalki", role: "Content" },
-    { name: "Faris Al Salem", role: "Media / Sports" },
-    { name: "Akbar Alhashim", role: "Photographer" },
-    { name: "Fatimah Alhumrani", role: "Photographer" },
-    { name: "Faisal Al Dossary", role: "IT" },
-    { name: "Fahad Aljehani", role: "Website" },
-  ];
-
   return (
     <div className="pt-24 pb-20 bg-ssa-black min-h-screen">
       

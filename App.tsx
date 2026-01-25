@@ -13,7 +13,7 @@ import ResourcesPage from './components/ResourcesPage';
 const App: React.FC = () => {
   // Simple hash-based routing
   // Defaulting to #resources so the Resources page is visible immediately
-  const getRoute = () => window.location.hash || '#home';
+  const getRoute = () => window.location.hash || '#resources';
   const [route, setRoute] = useState(getRoute());
 
   useEffect(() => {

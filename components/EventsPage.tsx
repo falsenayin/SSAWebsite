@@ -1,76 +1,9 @@
 import React from 'react';
 import { Calendar, Clock, MapPin, ArrowUpRight, Camera } from 'lucide-react';
+import { events } from '../data/events';
+import { galleryImages } from '../data/gallery';
 
 const EventsPage: React.FC = () => {
-  const events = [
-    {
-      tag: "Cultural",
-      title: "Saudi Founding Day",
-      description: "Join us for a grand celebration of our history with traditional food, music, and performances.",
-      image: "https://images.unsplash.com/photo-1576487248805-cf45f6bcc67f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      date: "Feb 22",
-      time: "6:00 PM",
-      location: "Price Center Ballroom"
-    },
-    {
-      tag: "Social",
-      title: "Ramadan Iftar",
-      description: "Break your fast with the community. Delicious catering, spiritual vibes, and good company guaranteed.",
-      image: "https://images.unsplash.com/photo-1584553256038-f99a38f4d962?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      date: "Mar 15",
-      time: "7:00 PM",
-      location: "The Village"
-    },
-    {
-      tag: "Professional",
-      title: "Career Workshop",
-      description: "Resume reviews and networking tips from alumni working in top tech and engineering firms.",
-      image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      date: "Apr 05",
-      time: "5:00 PM",
-      location: "Career Center"
-    },
-    {
-      tag: "Recreational",
-      title: "Beach Bonfire",
-      description: "Relax after midterms with s'mores, games, and a sunset at La Jolla Shores.",
-      image: "https://images.unsplash.com/photo-1525996686008-8e62d472658a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      date: "May 20",
-      time: "6:30 PM",
-      location: "La Jolla Shores"
-    },
-    {
-      tag: "Academic",
-      title: "Finals Study Jam",
-      description: "24-hour study space with free coffee, snacks, and tutors available for engineering and science courses.",
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      date: "Jun 10",
-      time: "8:00 PM",
-      location: "Geisel Library"
-    },
-    {
-      tag: "Social",
-      title: "Welcome Back BBQ",
-      description: "Kick off the new academic year with burgers, games, and a chance to meet the new board.",
-      image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      date: "Sep 25",
-      time: "12:00 PM",
-      location: "Muir Field"
-    }
-  ];
-
-  const galleryImages = [
-    "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1525921429624-479b6a26d84d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-  ];
-
   return (
     <div className="bg-ssa-black min-h-screen pt-24">
       
@@ -138,10 +71,21 @@ const EventsPage: React.FC = () => {
                         </p>
                         
                         <div className="mt-auto">
-                            <button className="w-full py-3.5 px-6 rounded-xl bg-ssa-black text-ssa-beige font-semibold text-sm hover:bg-ssa-darkgreen transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-lg">
-                                Register Now
-                                <ArrowUpRight size={16} className="text-ssa-gold transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                            </button>
+                            {event.registrationLink ? (
+                                <a 
+                                    href={event.registrationLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full py-3.5 px-6 rounded-xl bg-ssa-black text-ssa-beige font-semibold text-sm hover:bg-ssa-darkgreen transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-lg"
+                                >
+                                    Register Now
+                                    <ArrowUpRight size={16} className="text-ssa-gold transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                                </a>
+                            ) : (
+                                <button disabled className="w-full py-3.5 px-6 rounded-xl bg-ssa-black/10 text-ssa-black/40 font-semibold text-sm cursor-not-allowed flex items-center justify-center gap-2">
+                                    Registration Closed
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>

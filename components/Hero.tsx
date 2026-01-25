@@ -7,16 +7,16 @@ const Hero: React.FC = () => {
       {/* Background Image with Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/hero-bg.jpg"
-          alt="SSA Members"
-          className="w-full h-full object-cover opacity-60 scale-105"
+          src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" 
+          alt="University campus at night"
+          className="w-full h-full object-cover opacity-50 mix-blend-overlay blur-[3px] scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ssa-darkgreen/90 via-ssa-darkgreen/80 to-ssa-black"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center flex flex-col items-center">
-
+        
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ssa-gold/30 bg-ssa-darkgreen/50 backdrop-blur-md mb-8 animate-fade-in-up shadow-lg shadow-ssa-black/20">
           <Sparkles className="w-4 h-4 text-ssa-gold" />
           <span className="text-sm font-medium text-ssa-beige tracking-wide">Welcome to SSA</span>
@@ -26,15 +26,15 @@ const Hero: React.FC = () => {
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-ssa-beige mb-2 leading-tight max-w-6xl animate-fade-in-up delay-100 drop-shadow-lg">
           Saudi Students Association
         </h1>
-
+        
         {/* Updated: Made larger as requested */}
         <p className="text-2xl md:text-3xl text-ssa-gold font-bold mb-8 animate-fade-in-up delay-150 uppercase tracking-widest">
-          at UC San Diego
+           at UC San Diego
         </p>
 
         {/* Updated: Slightly smaller than subtitle for hierarchy */}
         <p className="text-base md:text-xl text-ssa-beige/90 max-w-2xl mb-10 animate-fade-in-up delay-200 leading-relaxed drop-shadow-md px-4">
-          Building community, celebrating culture, and supporting students.
+          Building community, celebrating culture, and supporting students. 
           Your home away from home in San Diego.
         </p>
 

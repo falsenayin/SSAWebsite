@@ -4,32 +4,32 @@ import { Users, BookOpen, Calendar, Heart, Briefcase, Globe } from 'lucide-react
 const Features: React.FC = () => {
   const features = [
     {
-      icon: <Users />,
+      Icon: Users,
       title: 'Saudi Community',
       description: 'Connect with fellow Saudi students and celebrate our culture through campus events and shared experiences.'
     },
     {
-      icon: <BookOpen />,
+      Icon: BookOpen,
       title: 'Student Resources',
       description: 'Access student-led resources, guides, and practical information to help you navigate UC San Diego.'
     },
     {
-      icon: <Calendar />,
+      Icon: Calendar,
       title: 'Events & Presence',
       description: 'Participate in cultural, social, and professional events that strengthen SSA\'s presence across campus.'
     },
     {
-      icon: <Heart />,
+      Icon: Heart,
       title: 'Support Network',
       description: 'Join a supportive community that understands the Saudi student experience and helps you feel at home.'
     },
     {
-      icon: <Briefcase />,
+      Icon: Briefcase,
       title: 'Career Development',
       description: 'Build leadership experience, explore career paths, and connect with alumni and professionals.'
     },
     {
-      icon: <Globe />,
+      Icon: Globe,
       title: 'Cultural Exchange',
       description: 'Represent Saudi culture on campus and engage with the wider UC San Diego community.'
     }
@@ -53,7 +53,7 @@ const Features: React.FC = () => {
               className="group p-6 rounded-xl bg-ssa-darkgreen/40 border border-ssa-sage/20 hover:border-ssa-gold/50 hover:bg-ssa-darkgreen/60 transition-all duration-300"
             >
               <div className="w-10 h-10 rounded-lg bg-ssa-darkgreen border border-ssa-gold/30 text-ssa-gold flex items-center justify-center mb-4 group-hover:bg-ssa-gold group-hover:text-ssa-black transition-colors duration-300">
-                {React.cloneElement(feature.icon as React.ReactElement, { size: 20 })}
+                <feature.Icon size={20} />
               </div>
               <h3 className="text-lg font-bold text-ssa-beige mb-2">{feature.title}</h3>
               <p className="text-ssa-beige/60 leading-relaxed text-sm">

@@ -1,37 +1,10 @@
 import React from 'react';
 import { ArrowRight, ArrowLeft, ArrowUpRight, Calendar } from 'lucide-react';
+import { events as allEvents } from '../data/events';
 
 const UpcomingEvents: React.FC = () => {
-    const events = [
-        {
-            tag: "Cultural",
-            title: "Saudi Founding Day",
-            description: "Join us for a grand celebration of our history with traditional food, music, and performances.",
-            image: "https://images.unsplash.com/photo-1576487248805-cf45f6bcc67f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-            date: "Feb 22"
-        },
-         {
-            tag: "Social",
-            title: "Ramadan Iftar",
-            description: "Break your fast with the community. Delicious catering, spiritual vibes, and good company guaranteed.",
-            image: "https://images.unsplash.com/photo-1584553256038-f99a38f4d962?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-            date: "Mar 15"
-        },
-         {
-            tag: "Professional",
-            title: "Career Workshop",
-            description: "Resume reviews and networking tips from alumni working in top tech and engineering firms.",
-            image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-            date: "Apr 05"
-        },
-         {
-            tag: "Recreational",
-            title: "Beach Bonfire",
-            description: "Relax after midterms with s'mores, games, and a sunset at La Jolla Shores.",
-            image: "https://images.unsplash.com/photo-1525996686008-8e62d472658a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-            date: "May 20"
-        }
-    ];
+    // Only show the first 4 events for the homepage
+    const events = allEvents.slice(0, 4);
 
     return (
         <section className="py-24 bg-ssa-black relative" id="events">
