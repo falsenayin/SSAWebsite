@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Instagram } from 'lucide-react';
 import Logo from './Logo';
 
 const Navbar: React.FC = () => {
@@ -47,12 +47,15 @@ const Navbar: React.FC = () => {
           ))}
         </div>
 
-        {/* Right side - Join Us button */}
+        {/* Right side - Instagram Button */}
         <div className="hidden md:block">
           <a
-            href="#contact"
-            className="bg-ssa-gold hover:bg-white text-ssa-black hover:text-ssa-darkgreen font-semibold py-1.5 px-5 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-lg shadow-ssa-gold/20 inline-block"
+            href="https://www.instagram.com/ssa.sandiego/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-ssa-gold hover:bg-white text-ssa-black hover:text-ssa-darkgreen font-semibold py-1.5 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-lg shadow-ssa-gold/20 inline-flex items-center gap-2"
           >
+            <Instagram size={16} />
             Join Us
           </a>
         </div>
