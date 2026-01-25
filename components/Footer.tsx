@@ -1,10 +1,10 @@
 import React from 'react';
-import { ArrowRight, Instagram, Twitter, Facebook, Linkedin } from 'lucide-react';
+import { Instagram, Linkedin, Phone } from 'lucide-react';
 import Logo from './Logo';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-ssa-black border-t border-ssa-sage/20 pt-16 pb-8">
+    <footer id="contact" className="bg-ssa-black border-t border-ssa-sage/20 pt-16 pb-8">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
@@ -18,10 +18,18 @@ const Footer: React.FC = () => {
               </p>
             </div>
             <div className="flex gap-4">
-              <SocialIcon icon={<Instagram size={18} />} />
-              <SocialIcon icon={<Twitter size={18} />} />
-              <SocialIcon icon={<Facebook size={18} />} />
-              <SocialIcon icon={<Linkedin size={18} />} />
+              <SocialIcon
+                href="https://www.instagram.com/ssa.sandiego/"
+                icon={<Instagram size={18} />}
+              />
+              <SocialIcon
+                href="https://www.linkedin.com/company/saudi-students-association-at-uc-san-diego/"
+                icon={<Linkedin size={18} />}
+              />
+              <SocialIcon
+                href="https://chat.whatsapp.com/LnaQUap7W8OB4XqdUZNEOU"
+                icon={<Phone size={18} />}
+              />
             </div>
           </div>
 
@@ -33,7 +41,7 @@ const Footer: React.FC = () => {
               <li><a href="#about" className="hover:text-ssa-gold transition-colors">About</a></li>
               <li><a href="#team" className="hover:text-ssa-gold transition-colors">Team</a></li>
               <li><a href="#events" className="hover:text-ssa-gold transition-colors">Events</a></li>
-              <li><a href="#gallery" className="hover:text-ssa-gold transition-colors">Gallery</a></li>
+              {/* Removed Gallery link as it's a section in Events now, or could link to #events */}
               <li><a href="#resources" className="hover:text-ssa-gold transition-colors">Resources</a></li>
             </ul>
           </div>
@@ -51,25 +59,15 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Newsletter */}
+          {/* Contact Info (Replaces Newsletter) */}
           <div>
-            <h4 className="text-ssa-beige font-bold mb-6">Stay Updated</h4>
+            <h4 className="text-ssa-beige font-bold mb-6">Get in Touch</h4>
             <p className="text-sm text-ssa-beige/70 mb-4">
-              Subscribe to our newsletter for the latest news and events.
+              Have questions or want to collaborate? Reach out to us via social media or email.
             </p>
-            <div className="relative">
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                className="w-full bg-ssa-darkgreen/30 border border-ssa-sage/30 rounded-lg py-3 px-4 text-sm text-ssa-beige placeholder:text-ssa-sage focus:outline-none focus:border-ssa-gold transition-colors pr-12"
-              />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-ssa-gold rounded-md text-ssa-black hover:bg-ssa-beige transition-colors">
-                <ArrowRight size={16} />
-              </button>
-            </div>
-            <p className="text-xs text-ssa-beige/40 mt-3">
-              We respect your privacy. Unsubscribe at any time.
-            </p>
+            <a href="mailto:ssa.ucsd@gmail.com" className="text-ssa-gold hover:text-ssa-beige transition-colors text-sm font-semibold">
+              ssa.ucsd@gmail.com
+            </a>
           </div>
         </div>
 
@@ -86,10 +84,12 @@ const Footer: React.FC = () => {
   );
 };
 
-const SocialIcon: React.FC<{ icon: React.ReactNode }> = ({ icon }) => (
-  <a 
-    href="#" 
-    className="w-9 h-9 rounded-full bg-ssa-darkgreen/50 flex items-center justify-center text-ssa-beige/70 hover:bg-ssa-gold hover:text-ssa-black transition-all duration-300"
+const SocialIcon: React.FC<{ icon: React.ReactNode; href: string }> = ({ icon, href }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-9 h-9 rounded-full bg-ssa-darkgreen/50 flex items-center justify-center text-ssa-beige/70 hover:bg-ssa-gold hover:text-ssa-black transition-all duration-300 transform hover:scale-110"
   >
     {icon}
   </a>

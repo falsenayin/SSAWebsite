@@ -12,8 +12,8 @@ import ResourcesPage from './components/ResourcesPage';
 
 const App: React.FC = () => {
   // Simple hash-based routing
-  // Defaulting to #resources so the Resources page is visible immediately
-  const getRoute = () => window.location.hash || '#resources';
+  // Defaulting to home (empty hash) or #home
+  const getRoute = () => window.location.hash || '#home';
   const [route, setRoute] = useState(getRoute());
 
   useEffect(() => {
@@ -30,20 +30,20 @@ const App: React.FC = () => {
   const renderView = () => {
     switch (route) {
       case '#about':
-        return <About />;
+        return <div key="about" className="animate-fade-in"><About /></div>;
       case '#events':
-        return <EventsPage />;
+        return <div key="events" className="animate-fade-in"><EventsPage /></div>;
       case '#resources':
-        return <ResourcesPage />;
+        return <div key="resources" className="animate-fade-in"><ResourcesPage /></div>;
       default:
         // Home page view
         return (
-          <>
+          <div key="home" className="animate-fade-in">
             <Hero />
             <Features />
             <UpcomingEvents />
             <GetInvolved />
-          </>
+          </div>
         );
     }
   };

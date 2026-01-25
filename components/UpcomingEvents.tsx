@@ -67,7 +67,11 @@ const UpcomingEvents: React.FC = () => {
                 {/* Cards Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {events.length > 0 ? events.map((event, index) => (
-                        <div key={index} className="group relative flex flex-col bg-ssa-beige rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-ssa-gold/10 transition-all duration-500 transform hover:-translate-y-2 h-full">
+                        <div
+                            key={index}
+                            className="group relative flex flex-col bg-ssa-beige rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-ssa-gold/10 transition-all duration-500 transform hover:-translate-y-2 h-full transform-gpu will-change-transform"
+                            style={{ backfaceVisibility: 'hidden', transform: 'translate3d(0,0,0)' }}
+                        >
                             {/* Image Container */}
                             <div className="h-56 overflow-hidden relative">
                                 <img
@@ -107,9 +111,12 @@ const UpcomingEvents: React.FC = () => {
                                             </div>
                                         </a>
                                     ) : (
-                                        <button disabled className="w-full py-3 px-6 rounded-2xl bg-ssa-black/10 text-ssa-black/40 font-semibold text-sm cursor-not-allowed flex justify-center group/btn shadow-inner">
-                                            Info Unavailable
-                                        </button>
+                                        <a href="#events" className="w-full py-3 px-6 rounded-2xl bg-ssa-black/90 text-ssa-beige font-semibold text-sm hover:bg-ssa-darkgreen transition-all duration-300 flex items-center justify-between group/btn shadow-md">
+                                            More Info
+                                            <div className="bg-ssa-gold/20 p-1 rounded-full group-hover/btn:bg-ssa-gold/30 transition-colors">
+                                                <ArrowRight size={16} className="text-ssa-gold transition-transform group-hover/btn:translate-x-0.5" />
+                                            </div>
+                                        </a>
                                     )}
                                 </div>
                             </div>

@@ -136,7 +136,11 @@ const EventsPage: React.FC = () => {
                     {/* Masonry Grid */}
                     <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
                         {(gallery.length > 0) ? gallery.map((img, i) => (
-                            <div key={img.id || i} className="break-inside-avoid rounded-3xl overflow-hidden relative group">
+                            <div
+                                key={img.id || i}
+                                className="break-inside-avoid rounded-3xl overflow-hidden relative group transform-gpu will-change-transform"
+                                style={{ backfaceVisibility: 'hidden', transform: 'translate3d(0,0,0)' }}
+                            >
                                 <img
                                     src={img.url}
                                     alt={img.caption || `Gallery ${i}`}

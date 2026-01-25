@@ -1,49 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SSA UCSD - Saudi Students Association</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              ssa: {
-                black: '#1D1E1E',
-                beige: '#E8DAC3',
-                gold: '#AE8336',
-                sage: '#506A66',
-                darkgreen: '#0C3430',
-              },
-              background: '#1D1E1E',
-              foreground: '#E8DAC3',
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSA UCSD - Saudi Students Association</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ssa: {
+              black: '#1D1E1E',
+              beige: '#E8DAC3',
+              gold: '#AE8336',
+              sage: '#506A66',
+              darkgreen: '#0C3430',
             },
-            fontFamily: {
-              sans: ['Poppins', 'sans-serif'],
-            },
+            background: '#1D1E1E',
+            foreground: '#E8DAC3',
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
           },
         },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #1D1E1E;
+      color: #E8DAC3;
+      /* Hide scrollbar completely but allow scrolling */
+      scrollbar-width: none;
+      /* Firefox */
+      -ms-overflow-style: none;
+      /* IE/Edge */
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
       }
-    </script>
-    <style>
-      body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #1D1E1E;
-        color: #E8DAC3;
-        /* Hide scrollbar completely but allow scrolling */
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE/Edge */
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-      /* Hide scrollbar for Chrome, Safari and Opera */
-      body::-webkit-scrollbar { 
-        display: none; 
-      }
-    </style>
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -57,10 +77,12 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body>
-    <div id="root"></div>
+
+<body>
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>
