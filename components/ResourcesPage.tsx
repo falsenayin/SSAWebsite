@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Rocket, GraduationCap, FileCheck, Home, Briefcase, Instagram, ArrowUpRight, Download, ExternalLink } from 'lucide-react';
+import { BookOpen, Rocket, GraduationCap, FileCheck, Home, Briefcase, Instagram, ArrowUpRight, Download, ExternalLink, Mail } from 'lucide-react';
 import { getResources } from '../lib/hygraph';
 
 // Icon mapping helper since we can't store React components in JSON/CMS easily
@@ -132,7 +132,8 @@ const ResourcesPage: React.FC = () => {
                         <p className="text-ssa-beige/60 max-w-2xl mx-auto mb-8 text-lg">
                             Our team is here to help you navigate university life. Reach out via email or social media accounts if you need assistance with anything not covered in the Handbook.
                         </p>
-                        <a href="#contact" className="inline-block bg-ssa-gold text-ssa-black px-8 py-3.5 rounded-xl font-bold hover:bg-ssa-beige transition-colors shadow-lg shadow-ssa-gold/10">
+                        <a href="mailto:ssa.ucsd@gmail.com" className="inline-flex items-center gap-2 bg-ssa-gold text-ssa-black px-8 py-3.5 rounded-xl font-bold hover:bg-ssa-beige transition-colors shadow-lg shadow-ssa-gold/10">
+                            <Mail size={18} />
                             Contact Us
                         </a>
                     </div>

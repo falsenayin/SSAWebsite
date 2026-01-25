@@ -47,8 +47,21 @@ const Navbar: React.FC = () => {
           ))}
         </div>
 
-        {/* Right side - Instagram Button */}
-        <div className="hidden md:block">
+        {/* Right side - Social Buttons */}
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="https://chat.whatsapp.com/LnaQUap7W8OB4XqdUZNEOU"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-1.5 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-lg shadow-green-500/20 inline-flex items-center gap-2"
+          >
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="stroke-[2.5px]">
+              <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+              <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0 .5-.5a1.4 1.4 0 0 1 1.4-1.4c.6 0 1.5.5 2 1.5l.3.6a.7.7 0 0 0 1.2 0l.3-.6c.5-1 1.4-1.5 2-1.5a1.4 1.4 0 0 1 1.4 1.4a.5.5 0 0 0 .5.5v1a.5.5 0 0 0 1 0" opacity="0" />
+              <path d="M9 10a2 2 0 0 0 2 2h2a2 2 0 0 0 2 -2v-1a2 2 0 0 0 -2 -2h-2a2 2 0 0 0 -2 2v1z" stroke="none" fill="currentColor" opacity="0.1" />
+            </svg>
+            Join
+          </a>
           <a
             href="https://www.instagram.com/ssa.sandiego/"
             target="_blank"
@@ -56,7 +69,7 @@ const Navbar: React.FC = () => {
             className="bg-ssa-gold hover:bg-white text-ssa-black hover:text-ssa-darkgreen font-semibold py-1.5 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 shadow-lg shadow-ssa-gold/20 inline-flex items-center gap-2"
           >
             <Instagram size={16} />
-            Join Us
+            Follow Us
           </a>
         </div>
 
