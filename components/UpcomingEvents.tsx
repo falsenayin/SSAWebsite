@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, ArrowLeft, ArrowUpRight, Calendar } from 'lucide-react';
-import { getEvents } from '../lib/hygraph';
+import { getEvents } from '../lib/contentful';
 
 const UpcomingEvents: React.FC = () => {
     const [events, setEvents] = useState<any[]>([]);
