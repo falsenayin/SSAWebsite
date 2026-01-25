@@ -45,75 +45,85 @@ const EventsPage: React.FC = () => {
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[50vh]">
-                    {events.length > 0 ? events.map((event, index) => (
-                        <div key={index} className="flex flex-col bg-ssa-beige rounded-[2rem] overflow-hidden group hover:shadow-2xl hover:shadow-ssa-gold/10 transition-all duration-500 transform hover:-translate-y-1">
-                            {/* Image */}
-                            <div className="h-60 overflow-hidden relative">
-                                <img
-                                    src={event.image}
-                                    alt={event.title}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.8] group-hover:saturate-100"
-                                    loading="lazy"
-                                />
-                                <div className="absolute top-4 left-4 flex gap-2">
-                                    <span className="bg-ssa-black/80 backdrop-blur-md text-ssa-gold px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wide border border-ssa-gold/20">
-                                        {event.tag}
-                                    </span>
+                    {loading ? (
+                        // Skeleton Loaders
+                        Array.from({ length: 6 }).map((_, i) => (
+                            <div key={i} className="flex flex-col bg-ssa-beige rounded-[2rem] overflow-hidden opacity-50 animate-pulse">
+                                <div className="h-60 bg-ssa-black/10"></div>
+                                <div className="p-8 flex flex-col gap-4">
+                                    <div className="h-8 bg-ssa-black/10 rounded w-3/4"></div>
+                                    <div className="h-4 bg-ssa-black/10 rounded w-1/2"></div>
+                                    <div className="h-20 bg-ssa-black/10 rounded w-full"></div>
+                                    <div className="mt-auto h-12 bg-ssa-black/10 rounded-xl w-full"></div>
                                 </div>
                             </div>
-                            {/* Content */}
-                            <div className="p-8 flex flex-col flex-grow">
-                                <div className="flex flex-col gap-2 mb-4">
-                                    <h3 className="text-2xl font-bold text-ssa-black leading-tight group-hover:text-ssa-darkgreen transition-colors">
-                                        {event.title}
-                                    </h3>
-                                    <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs font-bold text-ssa-black/50 uppercase tracking-wider mt-1">
-                                        <div className="flex items-center gap-1.5">
-                                            <Calendar size={14} className="text-ssa-gold" />
-                                            {event.date}
-                                        </div>
-                                        <div className="flex items-center gap-1.5">
-                                            <Clock size={14} className="text-ssa-gold" />
-                                            {event.time}
-                                        </div>
-                                        <div className="flex items-center gap-1.5">
-                                            <MapPin size={14} className="text-ssa-gold" />
-                                            {event.location}
-                                        </div>
+                        ))
+                    ) : events.length > 0 ? (
+                        events.map((event, index) => (
+                            <div key={index} className="flex flex-col bg-ssa-beige rounded-[2rem] overflow-hidden group hover:shadow-2xl hover:shadow-ssa-gold/10 transition-all duration-500 transform hover:-translate-y-1">
+                                {/* Image */}
+                                <div className="h-60 overflow-hidden relative">
+                                    <img
+                                        src={event.image}
+                                        alt={event.title}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.8] group-hover:saturate-100"
+                                        loading="lazy"
+                                    />
+                                    <div className="absolute top-4 left-4 flex gap-2">
+                                        <span className="bg-ssa-black/80 backdrop-blur-md text-ssa-gold px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wide border border-ssa-gold/20">
+                                            {event.tag}
+                                        </span>
                                     </div>
                                 </div>
+                                {/* Content */}
+                                <div className="p-8 flex flex-col flex-grow">
+                                    <div className="flex flex-col gap-2 mb-4">
+                                        <h3 className="text-2xl font-bold text-ssa-black leading-tight group-hover:text-ssa-darkgreen transition-colors">
+                                            {event.title}
+                                        </h3>
+                                        <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs font-bold text-ssa-black/50 uppercase tracking-wider mt-1">
+                                            <div className="flex items-center gap-1.5">
+                                                <Calendar size={14} className="text-ssa-gold" />
+                                                {event.date}
+                                            </div>
+                                            <div className="flex items-center gap-1.5">
+                                                <Clock size={14} className="text-ssa-gold" />
+                                                {event.time}
+                                            </div>
+                                            <div className="flex items-center gap-1.5">
+                                                <MapPin size={14} className="text-ssa-gold" />
+                                                {event.location}
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <p className="text-ssa-black/70 text-sm mb-8 leading-relaxed font-medium line-clamp-3">
-                                    {event.description}
-                                </p>
+                                    <p className="text-ssa-black/70 text-sm mb-8 leading-relaxed font-medium line-clamp-3">
+                                        {event.description}
+                                    </p>
 
-                                <div className="mt-auto">
-                                    {event.registrationLink ? (
-                                        <a
-                                            href={event.registrationLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="w-full py-3.5 px-6 rounded-xl bg-ssa-black text-ssa-beige font-semibold text-sm hover:bg-ssa-darkgreen transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-lg"
-                                        >
-                                            Register Now
-                                            <ArrowUpRight size={16} className="text-ssa-gold transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                                        </a>
-                                    ) : (
-                                        <button disabled className="w-full py-3.5 px-6 rounded-xl bg-ssa-black/10 text-ssa-black/40 font-semibold text-sm cursor-not-allowed flex items-center justify-center gap-2">
-                                            Registration Closed
-                                        </button>
-                                    )}
+                                    <div className="mt-auto">
+                                        {event.registrationLink ? (
+                                            <a
+                                                href={event.registrationLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-full py-3.5 px-6 rounded-xl bg-ssa-black text-ssa-beige font-semibold text-sm hover:bg-ssa-darkgreen transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-lg"
+                                            >
+                                                Register Now
+                                                <ArrowUpRight size={16} className="text-ssa-gold transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                                            </a>
+                                        ) : (
+                                            <button disabled className="w-full py-3.5 px-6 rounded-xl bg-ssa-black/10 text-ssa-black/40 font-semibold text-sm cursor-not-allowed flex items-center justify-center gap-2">
+                                                Registration Closed
+                                            </button>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )) : (
-                        // Show simple skeletons or message only if NOT loading (but we removed loading state var usage in render)
-                        // Actually better to show "No events" only if we are sure? 
-                        // For now let's just show "No events" if empty, typically initial empty state is fine or rapid fill.
-                        // Ideally we'd keep loading state but use skeleton. 
-                        // Given the request "darker for a second", I'll assume removing the layout shift is key.
+                        ))
+                    ) : (
                         <div className="col-span-3 text-center text-ssa-beige/50 italic py-20">
-                            {loading ? 'Loading...' : 'No events scheduled at the moment.'}
+                            No events scheduled at the moment.
                         </div>
                     )}
                 </div>

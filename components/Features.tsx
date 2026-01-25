@@ -36,7 +36,7 @@ const Features: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-ssa-black relative" id="about">
+    <section className="py-20 bg-ssa-black relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold text-ssa-beige mb-4">Why Join SSA?</h2>
