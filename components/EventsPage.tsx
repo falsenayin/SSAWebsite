@@ -46,18 +46,9 @@ const EventsPage: React.FC = () => {
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[50vh]">
                     {loading ? (
-                        // Skeleton Loaders
-                        Array.from({ length: 6 }).map((_, i) => (
-                            <div key={i} className="flex flex-col bg-ssa-beige rounded-[2rem] overflow-hidden opacity-50 animate-pulse">
-                                <div className="h-60 bg-ssa-black/10"></div>
-                                <div className="p-8 flex flex-col gap-4">
-                                    <div className="h-8 bg-ssa-black/10 rounded w-3/4"></div>
-                                    <div className="h-4 bg-ssa-black/10 rounded w-1/2"></div>
-                                    <div className="h-20 bg-ssa-black/10 rounded w-full"></div>
-                                    <div className="mt-auto h-12 bg-ssa-black/10 rounded-xl w-full"></div>
-                                </div>
-                            </div>
-                        ))
+                        <div className="col-span-3 text-center text-ssa-beige/50 py-20 animate-pulse">
+                            Loading events...
+                        </div>
                     ) : events.length > 0 ? (
                         events.map((event, index) => (
                             <div key={index} className="flex flex-col bg-ssa-beige rounded-[2rem] overflow-hidden group hover:shadow-2xl hover:shadow-ssa-gold/10 transition-all duration-500 transform hover:-translate-y-1">
