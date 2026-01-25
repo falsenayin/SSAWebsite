@@ -4,7 +4,7 @@ import { teamMembers } from '../data/team';
 
 const About: React.FC = () => {
     return (
-        <div className="pt-24 pb-20 bg-ssa-black min-h-screen">
+        <div id="about" className="pt-24 pb-20 bg-ssa-black min-h-screen">
 
             {/* 1. Who We Are */}
             <section className="container mx-auto px-6 mb-24">
