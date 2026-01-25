@@ -5,19 +5,26 @@ import { getEvents, getGalleryImages } from '../lib/hygraph';
 const EventsPage: React.FC = () => {
     const [events, setEvents] = useState<any[]>([]);
     const [gallery, setGallery] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [eventsLoading, setEventsLoading] = useState(true);
+    const [galleryLoading, setGalleryLoading] = useState(true);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const [eventsData, galleryData] = await Promise.all([
-                getEvents(),
-                getGalleryImages()
-            ]);
+        // Fetch Events independently
+        const fetchEvents = async () => {
+            const eventsData = await getEvents();
             setEvents(eventsData);
-            setGallery(galleryData);
-            setLoading(false);
+            setEventsLoading(false);
         };
-        fetchData();
+
+        // Fetch Gallery independently
+        const fetchGallery = async () => {
+            const galleryData = await getGalleryImages();
+            setGallery(galleryData);
+            setGalleryLoading(false);
+        };
+
+        fetchEvents();
+        fetchGallery();
     }, []);
 
     return (
@@ -45,7 +52,7 @@ const EventsPage: React.FC = () => {
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[50vh]">
-                    {loading ? (
+                    {eventsLoading ? (
                         <div className="col-span-3 text-center text-ssa-beige/50 py-20 animate-pulse">
                             Loading events...
                         </div>
@@ -138,7 +145,11 @@ const EventsPage: React.FC = () => {
 
                     {/* Masonry Grid */}
                     <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-                        {(gallery.length > 0) ? gallery.map((img, i) => (
+                        {galleryLoading ? (
+                            <div className="col-span-3 text-center text-ssa-beige/50 italic py-10 w-full animate-pulse">
+                                Loading gallery...
+                            </div>
+                        ) : (gallery.length > 0) ? gallery.map((img, i) => (
                             <div
                                 key={img.id || i}
                                 className="break-inside-avoid rounded-3xl overflow-hidden relative group transform-gpu will-change-transform"
