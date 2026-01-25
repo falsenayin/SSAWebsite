@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, ArrowLeft, ArrowUpRight, Calendar } from 'lucide-react';
-import { events as allEvents } from '../data/events';
+import { getEvents } from '../lib/hygraph';
 
 const UpcomingEvents: React.FC = () => {
-    // Only show the first 4 events for the homepage
-    const events = allEvents.slice(0, 4);
+    const [events, setEvents] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const data = await getEvents();
+            // Take only the first 4 events for the homepage
+            setEvents(data.slice(0, 4));
+            setLoading(false);
+        };
+        fetchEvents();
+    }, []);
+
+    if (loading) {
+        return (
+            <section className="py-24 bg-ssa-black relative" id="events">
+                <div className="container mx-auto px-6 text-center text-ssa-beige">
+                    <p>Loading upcoming events...</p>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="py-24 bg-ssa-black relative" id="events">
@@ -46,7 +66,7 @@ const UpcomingEvents: React.FC = () => {
 
                 {/* Cards Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {events.map((event, index) => (
+                    {events.length > 0 ? events.map((event, index) => (
                         <div key={index} className="group relative flex flex-col bg-ssa-beige rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-ssa-gold/10 transition-all duration-500 transform hover:-translate-y-2 h-full">
                             {/* Image Container */}
                             <div className="h-56 overflow-hidden relative">
@@ -83,7 +103,11 @@ const UpcomingEvents: React.FC = () => {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    )) : (
+                        <div className="col-span-4 text-center text-ssa-beige/50 italic py-10">
+                            No upcoming events found. Check back soon!
+                        </div>
+                    )}
                 </div>
             </div>
         </section>

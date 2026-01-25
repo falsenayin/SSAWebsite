@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, MapPin, ArrowUpRight, Camera } from 'lucide-react';
-import { events } from '../data/events';
+import { getEvents } from '../lib/hygraph';
 import { galleryImages } from '../data/gallery';
 
 const EventsPage: React.FC = () => {
+  const [events, setEvents] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+        const data = await getEvents();
+        setEvents(data);
+        setLoading(false);
+    };
+    fetchEvents();
+  }, []);
+
   return (
     <div className="bg-ssa-black min-h-screen pt-24">
       
@@ -28,8 +40,11 @@ const EventsPage: React.FC = () => {
             {/* Filter/Sort could go here */}
         </div>
 
+        {loading ? (
+             <div className="text-center text-ssa-beige/50 py-20">Loading events...</div>
+        ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {events.map((event, index) => (
+            {events.length > 0 ? events.map((event, index) => (
                 <div key={index} className="flex flex-col bg-ssa-beige rounded-[2rem] overflow-hidden group hover:shadow-2xl hover:shadow-ssa-gold/10 transition-all duration-500 transform hover:-translate-y-1">
                     {/* Image */}
                     <div className="h-60 overflow-hidden relative">
@@ -89,8 +104,13 @@ const EventsPage: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            ))}
+            )) : (
+                <div className="col-span-3 text-center text-ssa-beige/50 italic">
+                    No events scheduled at the moment.
+                </div>
+            )}
         </div>
+        )}
       </section>
 
       {/* 3. Gallery Section - "Moments Together" */}

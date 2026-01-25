@@ -1,22 +1,20 @@
-// This file is a template for when you are ready to connect Hygraph.
-// 1. Install graphql-request: npm install graphql-request graphql
-// 2. Get your High Performance Content API endpoint from Hygraph Settings -> API Access
-
-/*
 import { GraphQLClient, gql } from 'graphql-request';
 
-const HYGRAPH_ENDPOINT = 'YOUR_HYGRAPH_CONTENT_API_URL_HERE';
+// Hygraph Content API Endpoint
+const HYGRAPH_ENDPOINT = 'https://us-west-2.cdn.hygraph.com/content/cmb8k2b6r003o07utbglfvbei/master';
 
 const client = new GraphQLClient(HYGRAPH_ENDPOINT);
 
 export const getEvents = async () => {
   const query = gql`
     query Events {
-      events {
+      events(first: 100, orderBy: date_ASC) {
         title
-        date
         description
+        date
+        time
         location
+        tag
         registrationLink
         image {
           url
@@ -24,27 +22,43 @@ export const getEvents = async () => {
       }
     }
   `;
-  const result = await client.request(query);
-  return result.events;
+  
+  try {
+    const result = await client.request(query);
+    // Map Hygraph result structure to our app structure
+    return result.events.map((e: any) => ({
+      ...e,
+      image: e.image?.url || '', // Extract URL from image object
+    }));
+  } catch (error) {
+    console.error("Failed to fetch events:", error);
+    return [];
+  }
 };
 
 export const getResources = async () => {
   const query = gql`
     query Resources {
-      resources {
+      resources(first: 100) {
         title
         description
         tag
+        link
         linkText
-        externalLink
-        file {
-          url
-        }
+        iconName
       }
     }
   `;
-  const result = await client.request(query);
-  return result.resources;
+
+  try {
+    const result = await client.request(query);
+    return result.resources.map((r: any) => ({
+      ...r,
+      isExternal: true, // Default for CMS items
+      footerText: '' // Field not in CMS yet, defaulting to empty
+    }));
+  } catch (error) {
+    console.error("Failed to fetch resources:", error);
+    return [];
+  }
 };
-*/
-export const placeholder = "Uncomment the code above once you have Hygraph set up";

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BookOpen, Rocket, GraduationCap, FileCheck, Home, Briefcase, Instagram, ArrowUpRight, Download, ExternalLink } from 'lucide-react';
-import { resources } from '../data/resources';
+import { getResources } from '../lib/hygraph';
 
 // Icon mapping helper since we can't store React components in JSON/CMS easily
 const IconMap: Record<string, React.ReactNode> = {
@@ -12,6 +12,18 @@ const IconMap: Record<string, React.ReactNode> = {
 };
 
 const ResourcesPage: React.FC = () => {
+  const [resources, setResources] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchResources = async () => {
+        const data = await getResources();
+        setResources(data);
+        setLoading(false);
+    };
+    fetchResources();
+  }, []);
+
   return (
     <div className="bg-ssa-black min-h-screen pt-24 pb-20">
       
@@ -64,6 +76,9 @@ const ResourcesPage: React.FC = () => {
 
       {/* Main Grid for Sections 2-6 */}
       <section className="container mx-auto px-6 mb-24">
+        {loading ? (
+             <div className="text-center text-ssa-beige/50 py-10">Loading resources...</div>
+        ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             
             {resources.map((resource, index) => (
@@ -105,6 +120,7 @@ const ResourcesPage: React.FC = () => {
             </div>
 
         </div>
+        )}
       </section>
 
       {/* Additional Support Banner */}
