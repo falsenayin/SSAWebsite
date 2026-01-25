@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Phone, Instagram } from 'lucide-react';
+import { Sparkles, ArrowRight, Instagram } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (
