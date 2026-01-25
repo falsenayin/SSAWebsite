@@ -27,8 +27,11 @@ const UpcomingEvents: React.FC = () => {
     }
 
     return (
-        <section className="py-24 bg-ssa-black relative" id="events">
-            <div className="container mx-auto px-6">
+        <section className="py-24 bg-ssa-black relative" id="community-events">
+            {/* Smooth Top Gradient Transition */}
+            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-ssa-black via-ssa-black/90 to-transparent z-10 pointer-events-none"></div>
+
+            <div className="container mx-auto px-6 relative z-10">
 
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
@@ -56,12 +59,12 @@ const UpcomingEvents: React.FC = () => {
 
                 {/* Main Action Button */}
                 <div className="mb-16">
-                    <button className="bg-ssa-gold text-ssa-black px-8 py-4 rounded-full font-bold hover:bg-ssa-beige hover:scale-105 transition-all duration-300 flex items-center gap-3 shadow-lg shadow-ssa-gold/20">
+                    <a href="#events" className="inline-flex bg-ssa-gold text-ssa-black px-8 py-4 rounded-full font-bold hover:bg-ssa-beige hover:scale-105 transition-all duration-300 items-center gap-3 shadow-lg shadow-ssa-gold/20">
                         Explore all
                         <div className="bg-ssa-black/10 rounded-full p-1">
                             <ArrowRight size={16} />
                         </div>
-                    </button>
+                    </a>
                 </div>
 
                 {/* Cards Grid */}

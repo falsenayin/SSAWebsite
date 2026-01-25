@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserPlus, CalendarDays, BookOpen } from 'lucide-react';
+import { UserPlus, CalendarDays, BookOpen, Instagram } from 'lucide-react';
 
 const GetInvolved: React.FC = () => {
   return (
@@ -64,15 +64,25 @@ const GetInvolved: React.FC = () => {
               @ssa.sandiego
             </a>
           </div>
-          {/* Mock Feed Grid */}
+          {/* Mock Feed Grid with real images */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((i) => (
+            {[
+              { src: "/insta-1.png", alt: "SSA Event" },
+              { src: "/insta-2.png", alt: "SSA Gathering" },
+              { src: "/hero-bg.jpg", alt: "Community" },
+              { src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", alt: "UCSD Campus" }
+            ].map((post, i) => (
               <a key={i} href="https://www.instagram.com/ssa.sandiego/" target="_blank" rel="noopener noreferrer" className="group relative aspect-square bg-ssa-black/40 rounded-xl overflow-hidden border border-ssa-sage/20 hover:border-ssa-gold/50 transition-all duration-300">
-                <div className="absolute inset-0 flex items-center justify-center text-ssa-beige/20 group-hover:text-ssa-gold/50 transition-colors">
-                  {/* Instagram icon or image would go here */}
-                  <div className="w-8 h-8 border-2 border-current rounded-lg"></div>
+                <img
+                  src={post.src}
+                  alt={post.alt}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+                    <Instagram size={16} />
+                  </div>
                 </div>
-                <div className="w-full h-full bg-gradient-to-br from-ssa-darkgreen/20 to-ssa-black/40 group-hover:scale-105 transition-transform duration-500"></div>
               </a>
             ))}
           </div>

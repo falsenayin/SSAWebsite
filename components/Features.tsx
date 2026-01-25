@@ -48,7 +48,7 @@ const Features: React.FC = () => {
         {/* Updated: Smaller gap, simpler cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((feature, index) => (
-            <div 
+            <div
               key={index}
               className="group p-6 rounded-xl bg-ssa-darkgreen/40 border border-ssa-sage/20 hover:border-ssa-gold/50 hover:bg-ssa-darkgreen/60 transition-all duration-300"
             >
@@ -63,7 +63,9 @@ const Features: React.FC = () => {
           ))}
         </div>
       </div>
-    </section>
+      {/* Bottom Gradient Fade */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-ssa-black to-transparent pointer-events-none"></div>
+    </section >
   );
 };
 
