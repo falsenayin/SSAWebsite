@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, Rocket, GraduationCap, FileCheck, Home, Briefcase, Instagram, ArrowUpRight, Download, ExternalLink, Mail } from 'lucide-react';
-import { getResources } from '../lib/hygraph';
+import { getResources } from '../lib/contentful';
 
 // Icon mapping helper since we can't store React components in JSON/CMS easily
 const IconMap: Record<string, React.ReactNode> = {

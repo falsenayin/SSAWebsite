@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, MapPin, ArrowUpRight, Camera } from 'lucide-react';
-import { getEvents, getGalleryImages } from '../lib/hygraph';
+import { getEvents, getGalleryImages } from '../lib/contentful';
 
 const EventsPage: React.FC = () => {
     const [events, setEvents] = useState<any[]>([]);
