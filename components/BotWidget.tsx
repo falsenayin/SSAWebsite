@@ -28,6 +28,8 @@ export default function BotWidget() {
     hMobile: "min(70vh, 560px)",
     font: "Poppins, system-ui, Arial",
   };
+  theme.headerBg = theme.bg;
+  // theme.inputBg = theme.bg;
 
   const [open, setOpen] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([
@@ -84,28 +86,27 @@ export default function BotWidget() {
   return (
     <>
       <style>{`
-        .bot-scroll::-webkit-scrollbar {
-          width: 8px;
-        }
+.saqr-scroll::-webkit-scrollbar {
+  width: 8px;
+}
 
-        .bot-scroll::-webkit-scrollbar-track {
-          background: transparent;
-        }
+.saqr-scroll::-webkit-scrollbar-thumb {
+  background: #2b2b2b;
+  border-radius: 8px;
+}
 
-        .bot-scroll::-webkit-scrollbar-thumb {
-          background-color: rgba(174, 131, 54, 0.6); /* SSA gold */
-          border-radius: 8px;
-        }
+.saqr-scroll::-webkit-scrollbar-thumb:hover {
+  background: #404040;
+}
 
-        .bot-scroll::-webkit-scrollbar-thumb:hover {
-          background-color: rgba(174, 131, 54, 0.85);
-        }
+.saqr-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-        /* Firefox */
-        .bot-scroll {
-          scrollbar-width: thin;
-          scrollbar-color: rgba(174, 131, 54, 0.6) transparent;
-        }
+.saqr-scroll {
+  scrollbar-color: #2b2b2b transparent;
+}
+
       `}</style>
       {/* Floating Button */}
       <button
@@ -155,20 +156,31 @@ export default function BotWidget() {
           <div
             style={{
               padding: "12px 14px",
-              fontWeight: 700,
               background: theme.headerBg,
               borderBottom: `1px solid ${theme.panelBorder}`,
               color: theme.fg,
               fontFamily: theme.font,
-              letterSpacing: 0.2,
+              display: "grid",
+              gridTemplateColumns: "1fr auto 1fr",
+              alignItems: "center",
             }}
           >
-            Saqr🦅 — SSA Assistant
+            <div style={{ fontWeight: 800, justifySelf: "start" }}>
+              Saqr🦅
+            </div>
+
+            <div style={{ fontWeight: 600, opacity: 0.85, justifySelf: "center" }}>
+              SSA Assistant
+            </div>
+
+            {/* spacer column to keep center truly centered */}
+            <div />
           </div>
+
 
           <div
             ref={boxRef}
-            className="bot-scroll"
+            className="saqr-scroll"
             style={{
               flex: 1,
               overflowY: "auto",
