@@ -63,5 +63,6 @@ const App: React.FC = () => {
       <BotWidget />
     </div>
   );
+};
 
 export default App;
