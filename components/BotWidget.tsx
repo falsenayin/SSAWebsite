@@ -10,6 +10,25 @@ type Msg = { who: "you" | "bot"; text: string };
 export default function BotWidget() {
   const API = "https://bot-backend-byvn.onrender.com/chat";
 
+  // ✅ SSA theme styles ONLY (no logic changes)
+  const theme = {
+    bg: "#1D1E1E",
+    fg: "#E8DAC3",
+    gold: "#AE8336",
+    panelBorder: "rgba(232,218,195,.18)",
+    headerBg: "rgba(232,218,195,.06)",
+    botBubbleBg: "rgba(232,218,195,.08)",
+    inputBg: "rgba(232,218,195,.06)",
+    shadow: "0 18px 60px rgba(0,0,0,.55)",
+    radius: 16,
+    z: 999999,
+    w: 360,
+    h: 520,
+    wMobile: "calc(100vw - 32px)",
+    hMobile: "min(70vh, 560px)",
+    font: "Poppins, system-ui, Arial",
+  };
+
   const [open, setOpen] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([
     {
@@ -32,11 +51,7 @@ export default function BotWidget() {
     const question = q.trim();
     if (!question) return;
 
-    setMsgs((m) => [
-      ...m,
-      { who: "you", text: question },
-      { who: "bot", text: "• • •" },
-    ]);
+    setMsgs((m) => [...m, { who: "you", text: question }, { who: "bot", text: "• • •" }]);
     setInput("");
     setSources([]);
 
@@ -60,10 +75,7 @@ export default function BotWidget() {
     } catch (e: any) {
       setMsgs((m) => {
         const copy = [...m];
-        copy[copy.length - 1] = {
-          who: "bot",
-          text: "⚠️ صار خطأ في الاتصال بالسيرفر",
-        };
+        copy[copy.length - 1] = { who: "bot", text: "⚠️ صار خطأ في الاتصال بالسيرفر" };
         return copy;
       });
     }
@@ -81,11 +93,14 @@ export default function BotWidget() {
           width: 56,
           height: 56,
           borderRadius: 999,
-          border: "none",
+          border: `1px solid ${theme.panelBorder}`,
           cursor: "pointer",
-          boxShadow: "0 6px 18px rgba(0,0,0,.2)",
-          zIndex: 999999,
+          boxShadow: theme.shadow,
+          zIndex: theme.z,
           fontSize: 24,
+          background: theme.gold,
+          color: theme.bg,
+          fontFamily: theme.font,
         }}
         aria-label="Open Saqr"
       >
@@ -99,24 +114,29 @@ export default function BotWidget() {
             position: "fixed",
             bottom: 96,
             right: 24,
-            width: 360,
-            height: 520,
-            background: "white",
-            border: "1px solid #ddd",
-            borderRadius: 12,
-            boxShadow: "0 12px 28px rgba(0,0,0,.15)",
-            zIndex: 999999,
+            width: theme.w,
+            height: theme.h,
+            background: theme.bg,
+            border: `1px solid ${theme.panelBorder}`,
+            borderRadius: theme.radius,
+            boxShadow: theme.shadow,
+            zIndex: theme.z,
             display: "flex",
             flexDirection: "column",
             overflow: "hidden",
+            maxWidth: theme.wMobile,
+            maxHeight: theme.hMobile,
           }}
         >
           <div
             style={{
               padding: "12px 14px",
               fontWeight: 700,
-              background: "#f6f8fa",
-              borderBottom: "1px solid #eee",
+              background: theme.headerBg,
+              borderBottom: `1px solid ${theme.panelBorder}`,
+              color: theme.fg,
+              fontFamily: theme.font,
+              letterSpacing: 0.2,
             }}
           >
             Saqr🦅 — SSA Assistant
@@ -128,8 +148,9 @@ export default function BotWidget() {
               flex: 1,
               overflowY: "auto",
               padding: 12,
-              fontFamily: "system-ui, Arial",
+              fontFamily: theme.font,
               fontSize: 14,
+              color: theme.fg,
             }}
           >
             {msgs.map((m, idx) => {
@@ -139,7 +160,7 @@ export default function BotWidget() {
                 <div
                   key={idx}
                   style={{
-                    margin: "8px 0",
+                    margin: "10px 0",
                     display: "flex",
                     justifyContent: isBot ? "flex-end" : "flex-start",
                   }}
@@ -147,16 +168,17 @@ export default function BotWidget() {
                   <div
                     dir="auto"
                     style={{
-                      padding: "8px 10px",
-                      borderRadius: 12,
-                      background: isBot ? "#f2f4f7" : "#1f6feb",
-                      color: isBot ? "black" : "white",
+                      padding: "10px 12px",
+                      borderRadius: 14,
+                      background: isBot ? theme.botBubbleBg : theme.gold,
+                      color: isBot ? theme.fg : theme.bg,
                       maxWidth: 300,
                       whiteSpace: "pre-wrap",
                       wordBreak: "break-word",
                       unicodeBidi: "isolate",
                       textAlign: "start",
-                      lineHeight: 1.4,
+                      lineHeight: 1.5,
+                      border: `1px solid ${isBot ? theme.panelBorder : "rgba(0,0,0,.12)"}`,
                     }}
                   >
                     <ReactMarkdown>{m.text}</ReactMarkdown>
@@ -168,23 +190,32 @@ export default function BotWidget() {
             {sources.length > 0 && (
               <div
                 style={{
-                  color: "#6a737d",
+                  color: "rgba(232,218,195,.75)",
                   fontSize: 12,
-                  marginTop: 6,
+                  marginTop: 10,
                   whiteSpace: "pre-wrap",
+                  fontFamily: theme.font,
                 }}
               >
-                <div style={{ fontWeight: 600, marginBottom: 4 }}>
+                <div style={{ fontWeight: 700, marginBottom: 6, color: theme.fg }}>
                   Sources 📖
                 </div>
                 {sources.map((s, i) => (
-                  <div key={i}>• {s.section}</div>
+                  <div key={i} style={{ marginBottom: 4 }}>
+                    • {s.section}
+                  </div>
                 ))}
               </div>
             )}
           </div>
 
-          <div style={{ display: "flex", borderTop: "1px solid #eee" }}>
+          <div
+            style={{
+              display: "flex",
+              borderTop: `1px solid ${theme.panelBorder}`,
+              background: theme.headerBg,
+            }}
+          >
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -192,10 +223,13 @@ export default function BotWidget() {
               dir="auto"
               style={{
                 flex: 1,
-                padding: 10,
+                padding: 12,
                 border: 0,
                 outline: 0,
                 textAlign: "start",
+                background: theme.inputBg,
+                color: theme.fg,
+                fontFamily: theme.font,
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter") ask(input);
@@ -206,9 +240,11 @@ export default function BotWidget() {
               style={{
                 width: 90,
                 border: 0,
-                background: "#1f6feb",
-                color: "white",
+                background: theme.gold,
+                color: theme.bg,
                 cursor: "pointer",
+                fontWeight: 800,
+                fontFamily: theme.font,
               }}
             >
               ارسل
