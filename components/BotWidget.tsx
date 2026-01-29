@@ -83,6 +83,30 @@ export default function BotWidget() {
 
   return (
     <>
+      <style>{`
+        .bot-scroll::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        .bot-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .bot-scroll::-webkit-scrollbar-thumb {
+          background-color: rgba(174, 131, 54, 0.6); /* SSA gold */
+          border-radius: 8px;
+        }
+
+        .bot-scroll::-webkit-scrollbar-thumb:hover {
+          background-color: rgba(174, 131, 54, 0.85);
+        }
+
+        /* Firefox */
+        .bot-scroll {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(174, 131, 54, 0.6) transparent;
+        }
+      `}</style>
       {/* Floating Button */}
       <button
         onClick={() => setOpen((v) => !v)}
@@ -144,6 +168,7 @@ export default function BotWidget() {
 
           <div
             ref={boxRef}
+            className="bot-scroll"
             style={{
               flex: 1,
               overflowY: "auto",
