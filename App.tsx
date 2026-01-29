@@ -9,6 +9,7 @@ import GetInvolved from './components/GetInvolved';
 import UpcomingEvents from './components/UpcomingEvents';
 import EventsPage from './components/EventsPage';
 import ResourcesPage from './components/ResourcesPage';
+import BotWidget from './components/BotWidget';
 
 const App: React.FC = () => {
   // Simple hash-based routing
@@ -57,8 +58,10 @@ const App: React.FC = () => {
         <Contact />
       </main>
       <Footer />
+  
+      {/* Saqr AI Widget */}
+      <BotWidget />
     </div>
   );
-};
 
 export default App;
