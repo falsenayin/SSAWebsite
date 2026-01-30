@@ -27,7 +27,7 @@ export default function BotWidget() {
 
   // ✅ SSA theme styles ONLY (no logic changes)
   const theme = {
-    bg: "#1D1E1E",
+    bg: "#1d1e1e",
     fg: "#E8DAC3",
     gold: "#AE8336",
     panelBorder: "rgba(232,218,195,.18)",
@@ -43,6 +43,9 @@ export default function BotWidget() {
     hMobile: "min(70vh, 560px)",
     font: "Poppins, system-ui, Arial",
   };
+  theme.bg = "rgb(12, 52, 48, 0.8)";
+  theme.bg = "rgba(29, 30, 30, 0.4)";
+  theme.bg = "rgba(29, 30, 30, 0.6)";
   theme.headerBg = theme.bg;
   // theme.inputBg = theme.bg;
 
@@ -110,27 +113,25 @@ export default function BotWidget() {
   return (
     <>
       <style>{`
-        .bot-scroll::-webkit-scrollbar {
+        .bot-scroll::-webkit-scrollbar,
+        .md pre::-webkit-scrollbar,
+        .md .katex-display::-webkit-scrollbar {
           width: 8px;
+          height: 8px;
         }
 
-        .bot-scroll::-webkit-scrollbar-thumb {
+        .bot-scroll::-webkit-scrollbar-thumb,
+        .md pre::-webkit-scrollbar-thumb,
+        .md .katex-display::-webkit-scrollbar-thumb {
           background: #2b2b2b;
           border-radius: 8px;
         }
 
-        .bot-scroll::-webkit-scrollbar-thumb:hover {
-          background: #404040;
-        }
-
-        .bot-scroll::-webkit-scrollbar-track {
+        .bot-scroll::-webkit-scrollbar-track,
+        .md pre::-webkit-scrollbar-track,
+        .md .katex-display::-webkit-scrollbar-track {
           background: transparent;
         }
-
-        .bot-scroll {
-          scrollbar-color: #2b2b2b transparent;
-        }
-
 
         .md a {
           color: #AE8336;                 /* SSA gold */
@@ -349,7 +350,7 @@ export default function BotWidget() {
               />
             </div>
 
-            <div style={{ fontWeight: 600, opacity: 0.25, justifySelf: "center" }}>
+            <div style={{ fontWeight: 600, opacity: 0.25, justifySelf: "center"}}>
               SSA Assistant
             </div>
             {/* spacer column to keep center truly centered */}
@@ -361,6 +362,7 @@ export default function BotWidget() {
             ref={boxRef}
             className="bot-scroll"
             style={{
+              background: theme.bg, // ✅ add this
               flex: 1,
               overflowY: "auto",
               padding: 12,
@@ -388,7 +390,7 @@ export default function BotWidget() {
                       padding: "10px 12px",
                       borderRadius: 14,
                       background: isBot ? theme.botBubbleBg : theme.gold,
-                      color: isBot ? theme.fg : theme.bg,
+                      color: isBot ? theme.fg : "black",
                       maxWidth: 300,
                       whiteSpace: "pre-wrap",
                       wordBreak: "break-word",
