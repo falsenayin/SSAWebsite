@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 
 type Source = { section: string; score: number };
 type ChatResp = { answer: string; sources: Source[] };
@@ -173,6 +176,83 @@ export default function BotWidget() {
           background: transparent;
         }
 
+
+        /* --- KaTeX display math ( $$ ... $$ ): make it look like a code block + horizontal scroll --- */
+        .md .katex-display {
+          display: block;                 /* span -> block so padding works like a block */
+          max-width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
+
+          padding: 12px;
+          border-radius: 12px;
+          border: 1px solid rgba(232,218,195,.18);
+          background: rgba(232,218,195,.06);
+
+          /* optional spacing */
+          margin: 10px 0;
+        }
+
+        /* KaTeX display internal container sometimes has inline sizing; keep it contained */
+        .md .katex-display > .katex {
+          display: inline-block;          /* ensures scroll works properly */
+        }
+
+        /* scrollbar styling for display math blocks */
+        .md .katex-display::-webkit-scrollbar {
+          height: 8px;
+        }
+        .md .katex-display::-webkit-scrollbar-thumb {
+          background: #2b2b2b;
+          border-radius: 8px;
+        }
+        .md .katex-display::-webkit-scrollbar-thumb:hover {
+          background: #404040;
+        }
+        .md .katex-display::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+
+        /* --- Inline KaTeX ( $ ... $ ): prevent overflow by making it scrollable --- */
+        .md .katex {
+          display: inline-block;          /* needed for max-width + overflow */
+          max-width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
+          vertical-align: bottom;         /* nicer baseline */
+
+          /* keep KaTeX default behavior (no wrapping), but scroll instead of overflow */
+          white-space: nowrap;
+        }
+
+        /* inline scrollbar styling */
+        .md .katex::-webkit-scrollbar {
+          height: 6px;
+        }
+        .md .katex::-webkit-scrollbar-thumb {
+          background: #2b2b2b;
+          border-radius: 8px;
+        }
+        .md .katex::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+
+        /* --- Force all KaTeX output to render LTR even inside Arabic/RTL UI --- */
+        .md .katex,
+        .md .katex-display,
+        .md .katex * {
+          direction: ltr;
+          unicode-bidi: isolate;
+        }
+
+
+        /* Pill input placeholder styling */
+          .pill-input::placeholder {
+            color: rgba(232, 218, 195, 0.55);
+            opacity: 1; /* important: overrides browser default faded placeholder */
+          }
       `}</style>
       {/* Floating Button */}
       <button
@@ -188,14 +268,23 @@ export default function BotWidget() {
           cursor: "pointer",
           boxShadow: theme.shadow,
           zIndex: theme.z,
-          fontSize: 24,
           background: theme.gold,
-          color: theme.bg,
-          fontFamily: theme.font,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
         aria-label="Open Saqr"
       >
-        🦅
+        <img
+          src="/saqr-icon.png"
+          alt="Saqr"
+          draggable={false}
+          style={{
+            width: 30,
+            height: 30,
+            display: "block",
+          }}
+        />
       </button>
 
       {/* Panel */}
@@ -286,6 +375,8 @@ export default function BotWidget() {
                   >
                     <div className="md">
                       <ReactMarkdown
+                        remarkPlugins={[remarkMath]}
+                        rehypePlugins={[rehypeKatex]}
                         components={{
                           a: ({ node, ...props }) => (
                             <a
@@ -327,46 +418,86 @@ export default function BotWidget() {
           </div>
 
           <div
-            style={{
-              display: "flex",
-              borderTop: `1px solid ${theme.panelBorder}`,
-              background: theme.headerBg,
-            }}
-          >
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="...اسألني عن أي شي" // "اسألني عن أي شي..."
-              dir="auto"
-              style={{
-                flex: 1,
-                padding: 12,
-                border: 0,
-                outline: 0,
-                textAlign: "start",
-                background: theme.inputBg,
-                color: theme.fg,
-                fontFamily: theme.font,
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") ask(input);
-              }}
-            />
-            <button
-              onClick={() => ask(input)}
-              style={{
-                width: 90,
-                border: 0,
-                background: theme.gold,
-                color: theme.bg,
-                cursor: "pointer",
-                fontWeight: 800,
-                fontFamily: theme.font,
-              }}
-            >
-              ارسل
-            </button>
-          </div>
+  style={{
+    // borderTop: `1px solid ${theme.panelBorder}`,
+    background: theme.headerBg,
+    paddingLeft: "10px",
+    paddingRight: "12px",
+    paddingTop: "5px",
+    paddingBottom: "10px",
+  }}
+>
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: 10,
+    }}
+  >
+    {/* Pill input */}
+    <div
+      style={{
+        flex: 1,
+        display: "flex",
+        alignItems: "center",
+        background: theme.inputBg,
+        border: `1px solid ${theme.panelBorder}`,
+        borderRadius: 999,
+        padding: "10px 12px",
+      }}
+    >
+      <input
+        className="pill-input"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="...اسألني عن أي شي"
+        dir="auto"
+        style={{
+          width: "100%",
+          border: 0,
+          outline: 0,
+          background: "transparent",
+          color: theme.fg,
+          fontFamily: theme.font,
+          fontSize: 14,
+          textAlign: "start",
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") ask(input);
+        }}
+      />
+    </div>
+
+    {/* Circle send button */}
+    <button
+      onClick={() => ask(input)}
+      aria-label="Send"
+      disabled={!input.trim()}
+      style={{
+        width: 36,
+        height: 36,
+        padding: 0,
+        border: "none",
+        background: "transparent",
+        cursor: input.trim() ? "pointer" : "default",
+        opacity: input.trim() ? 1 : 0.4,
+        flexShrink: 0,
+      }}
+    >
+      <img
+        src="/send-button-icon.png"
+        alt="Send"
+        draggable={false}
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "block",
+        }}
+      />
+    </button>
+  </div>
+</div>
+
         </div>
       )}
     </>
