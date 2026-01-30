@@ -398,7 +398,7 @@ export default function BotWidget() {
                       textAlign: "start",
                       fontWeight: isBot ? 400 : 500,
                       lineHeight: 1.5,
-                      border: `1px solid ${isBot ? theme.panelBorder : theme.gold}`,
+                      border: `1px solid ${isBot ? theme.panelBorder : "rgba(174, 131, 54, 0.25)"}`,
                     }}
                   >
                     <div className="md">
@@ -433,8 +433,8 @@ export default function BotWidget() {
                   fontFamily: theme.font,
                 }}
               >
-                <div style={{ fontWeight: 700, marginBottom: 6, color: theme.fg }}>
-                  Sources 📖
+                <div style={{ fontWeight: 620, marginBottom: 6, color: theme.fg }}>
+                  Sources
                 </div>
                 {sources.map((s, i) => (
                   <div key={i} style={{ marginBottom: 4 }}>
