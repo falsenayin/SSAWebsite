@@ -276,7 +276,7 @@ export default function BotWidget() {
         aria-label="Open Saqr"
       >
         <img
-          src="/saqr-icon.png"
+          src="/saqr-icon-black.png"
           alt="Saqr"
           draggable={false}
           style={{
@@ -320,14 +320,38 @@ export default function BotWidget() {
               alignItems: "center",
             }}
           >
-            <div style={{ fontWeight: 800, justifySelf: "start" }}>
-              Saqr🦅
+            <div
+              style={{
+                fontWeight: 800,
+                justifySelf: "start",
+                color: theme.gold,
+                position: "relative",          // anchor for the absolute icon
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+            >
+              <span>Saqr</span>
+
+              <img
+                src="/saqr-icon-gold.png"
+                alt="Saqr"
+                draggable={false}
+                style={{
+                  width: 30,
+                  height: 30,
+
+                  position: "absolute",        // ✅ removed from flow (won’t affect border/height)
+                  left: 42,                    // tweak this
+                  top: "50%",
+                  transform: "translateX(-27.5%) translateY(-55%)", // tweak this
+                  pointerEvents: "none",       // optional
+                }}
+              />
             </div>
 
-            <div style={{ fontWeight: 600, opacity: 0.85, justifySelf: "center" }}>
+            <div style={{ fontWeight: 600, opacity: 0.25, justifySelf: "center" }}>
               SSA Assistant
             </div>
-
             {/* spacer column to keep center truly centered */}
             <div />
           </div>
