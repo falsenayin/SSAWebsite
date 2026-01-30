@@ -7,6 +7,18 @@ type Source = { section: string; score: number };
 type ChatResp = { answer: string; sources: Source[] };
 type Msg = { who: "you" | "bot"; text: string };
 
+function getSessionId() {
+  const KEY = "bot_session_id";
+  let sid = localStorage.getItem(KEY);
+
+  if (!sid) {
+    sid = crypto.randomUUID();
+    localStorage.setItem(KEY, sid);
+  }
+
+  return sid;
+}
+
 export default function BotWidget() {
   const API = "https://bot-backend-byvn.onrender.com/chat";
 
@@ -41,6 +53,12 @@ export default function BotWidget() {
   const [sources, setSources] = useState<Source[]>([]);
   const [input, setInput] = useState("");
 
+  const sessionIdRef = useRef<string | null>(null);
+  if (!sessionIdRef.current) {
+    sessionIdRef.current = getSessionId();
+  }
+
+
   const boxRef = useRef<HTMLDivElement | null>(null);
 
   // Auto-scroll
@@ -61,7 +79,10 @@ export default function BotWidget() {
       const res = await fetch(API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: question }),
+        body: JSON.stringify({
+          message: question,
+          session_id: sessionIdRef.current,
+        }),
       });
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -86,24 +107,24 @@ export default function BotWidget() {
   return (
     <>
       <style>{`
-.saqr-scroll::-webkit-scrollbar {
+.bot-scroll::-webkit-scrollbar {
   width: 8px;
 }
 
-.saqr-scroll::-webkit-scrollbar-thumb {
+.bot-scroll::-webkit-scrollbar-thumb {
   background: #2b2b2b;
   border-radius: 8px;
 }
 
-.saqr-scroll::-webkit-scrollbar-thumb:hover {
+.bot-scroll::-webkit-scrollbar-thumb:hover {
   background: #404040;
 }
 
-.saqr-scroll::-webkit-scrollbar-track {
+.bot-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.saqr-scroll {
+.bot-scroll {
   scrollbar-color: #2b2b2b transparent;
 }
 
@@ -180,7 +201,7 @@ export default function BotWidget() {
 
           <div
             ref={boxRef}
-            className="saqr-scroll"
+            className="bot-scroll"
             style={{
               flex: 1,
               overflowY: "auto",
