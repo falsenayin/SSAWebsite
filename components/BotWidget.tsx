@@ -32,7 +32,7 @@ export default function BotWidget() {
     gold: "#AE8336",
     panelBorder: "rgba(232,218,195,.18)",
     headerBg: "rgba(232,218,195,.06)",
-    botBubbleBg: "rgba(232,218,195,.08)",
+    botBubbleBg: "rgba(232,218,195,.045)",
     inputBg: "rgba(232,218,195,.06)",
     shadow: "0 18px 60px rgba(0,0,0,.55)",
     radius: 16,
@@ -389,8 +389,8 @@ export default function BotWidget() {
                     style={{
                       padding: "10px 12px",
                       borderRadius: 14,
-                      background: isBot ? theme.botBubbleBg : theme.gold,
-                      color: isBot ? theme.fg : "black",
+                      background: isBot ? theme.botBubbleBg : "rgba(174, 131, 54, 0.075)",
+                      color: isBot ? theme.fg : theme.gold,
                       maxWidth: 300,
                       whiteSpace: "pre-wrap",
                       wordBreak: "break-word",
@@ -398,7 +398,7 @@ export default function BotWidget() {
                       textAlign: "start",
                       fontWeight: isBot ? 400 : 500,
                       lineHeight: 1.5,
-                      border: `1px solid ${isBot ? theme.panelBorder : "rgba(0,0,0,.12)"}`,
+                      border: `1px solid ${isBot ? theme.panelBorder : theme.gold}`,
                     }}
                   >
                     <div className="md">
