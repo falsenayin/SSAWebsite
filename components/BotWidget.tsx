@@ -107,26 +107,71 @@ export default function BotWidget() {
   return (
     <>
       <style>{`
-.bot-scroll::-webkit-scrollbar {
-  width: 8px;
-}
+        .bot-scroll::-webkit-scrollbar {
+          width: 8px;
+        }
 
-.bot-scroll::-webkit-scrollbar-thumb {
-  background: #2b2b2b;
-  border-radius: 8px;
-}
+        .bot-scroll::-webkit-scrollbar-thumb {
+          background: #2b2b2b;
+          border-radius: 8px;
+        }
 
-.bot-scroll::-webkit-scrollbar-thumb:hover {
-  background: #404040;
-}
+        .bot-scroll::-webkit-scrollbar-thumb:hover {
+          background: #404040;
+        }
 
-.bot-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
+        .bot-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
 
-.bot-scroll {
-  scrollbar-color: #2b2b2b transparent;
-}
+        .bot-scroll {
+          scrollbar-color: #2b2b2b transparent;
+        }
+
+
+        .md a {
+          color: #AE8336;                 /* SSA gold */
+          font-weight: 600;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          cursor: pointer;
+        }
+
+        .md a:hover {
+          opacity: 0.85;
+        }
+
+        /* --- Markdown code blocks: scroll horizontally, never overflow bubble --- */
+        .md pre {
+          max-width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
+          white-space: pre;          /* IMPORTANT: override any pre-wrap from parent */
+          padding: 12px;
+          border-radius: 12px;
+          border: 1px solid rgba(232,218,195,.18);
+          background: rgba(232,218,195,.06);
+        }
+
+        .md pre code {
+          white-space: inherit;      /* keep pre behavior */
+          display: block;
+        }
+
+        /* Optional: nicer horizontal scrollbar just for code blocks */
+        .md pre::-webkit-scrollbar {
+          height: 8px;
+        }
+        .md pre::-webkit-scrollbar-thumb {
+          background: #2b2b2b;
+          border-radius: 8px;
+        }
+        .md pre::-webkit-scrollbar-thumb:hover {
+          background: #404040;
+        }
+        .md pre::-webkit-scrollbar-track {
+          background: transparent;
+        }
 
       `}</style>
       {/* Floating Button */}
@@ -239,7 +284,21 @@ export default function BotWidget() {
                       border: `1px solid ${isBot ? theme.panelBorder : "rgba(0,0,0,.12)"}`,
                     }}
                   >
-                    <ReactMarkdown>{m.text}</ReactMarkdown>
+                    <div className="md">
+                      <ReactMarkdown
+                        components={{
+                          a: ({ node, ...props }) => (
+                            <a
+                              {...props}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            />
+                          ),
+                        }}
+                      >
+                        {m.text}
+                      </ReactMarkdown>
+                    </div>
                   </div>
                 </div>
               );
