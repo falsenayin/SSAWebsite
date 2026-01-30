@@ -312,7 +312,7 @@ export default function BotWidget() {
             style={{
               padding: "12px 14px",
               background: theme.headerBg,
-              borderBottom: `1px solid ${theme.panelBorder}`,
+              // borderBottom: `1px solid ${theme.panelBorder}`,
               color: theme.fg,
               fontFamily: theme.font,
               display: "grid",
@@ -342,6 +342,7 @@ export default function BotWidget() {
               padding: 12,
               fontFamily: theme.font,
               fontSize: 14,
+              // fontWeight: 500,  // specified per isBot
               color: theme.fg,
             }}
           >
@@ -369,6 +370,7 @@ export default function BotWidget() {
                       wordBreak: "break-word",
                       unicodeBidi: "isolate",
                       textAlign: "start",
+                      fontWeight: isBot ? 400 : 500,
                       lineHeight: 1.5,
                       border: `1px solid ${isBot ? theme.panelBorder : "rgba(0,0,0,.12)"}`,
                     }}
