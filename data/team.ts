@@ -6,7 +6,7 @@ export const teamMembers = [
   { name: "Mariya Alsaiari", role: "Media Lead" },
   { name: "Almontaha Alsonbul", role: "Treasurer" },
   { name: "Abdulrahman Alghamdi", role: "Secretary" },
-  { name: "Ahmed Ageel", role: "Events" },
+  { name: "Ahmad Ageel", role: "Events" },
   { name: "Khalil Alshanqiti", role: "Events" },
   { name: "Nooran Basheer", role: "Events" },
   { name: "Anas Almalki", role: "Content" },
